@@ -73,14 +73,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""Sprint"",
-                    ""type"": ""Button"",
-                    ""id"": ""7cf70ac8-d67f-4842-800a-476abe34684e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -204,17 +196,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                     ""action"": ""CameraControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2d02e40c-3f6c-439a-b33b-d3dd161463ac"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -230,7 +211,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
         m_Gameplay_Reload = m_Gameplay.FindAction("Reload", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_CameraControl = m_Gameplay.FindAction("CameraControl", throwIfNotFound: true);
-        m_Gameplay_Sprint = m_Gameplay.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -287,7 +267,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Reload;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_CameraControl;
-    private readonly InputAction m_Gameplay_Sprint;
     public struct GameplayActions
     {
         private @GameplayControls m_Wrapper;
@@ -299,7 +278,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
         public InputAction @Reload => m_Wrapper.m_Gameplay_Reload;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @CameraControl => m_Wrapper.m_Gameplay_CameraControl;
-        public InputAction @Sprint => m_Wrapper.m_Gameplay_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,9 +308,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                 @CameraControl.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
                 @CameraControl.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
                 @CameraControl.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
-                @Sprint.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
-                @Sprint.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
-                @Sprint.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSprint;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -358,9 +333,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                 @CameraControl.started += instance.OnCameraControl;
                 @CameraControl.performed += instance.OnCameraControl;
                 @CameraControl.canceled += instance.OnCameraControl;
-                @Sprint.started += instance.OnSprint;
-                @Sprint.performed += instance.OnSprint;
-                @Sprint.canceled += instance.OnSprint;
             }
         }
     }
@@ -374,6 +346,5 @@ public class @GameplayControls : IInputActionCollection, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCameraControl(InputAction.CallbackContext context);
-        void OnSprint(InputAction.CallbackContext context);
     }
 }
