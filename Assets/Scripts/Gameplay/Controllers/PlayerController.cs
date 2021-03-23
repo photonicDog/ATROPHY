@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.Raycast(controller.bounds.center, Vector3.down, controller.bounds.extents.y + 0.3f);
-        Debug.Log($"Grounded: {isGrounded}, Spacebar: {inputManager.Jumped()}");
         if (isGrounded && playerVelocity.y < 0f)
         {
             playerVelocity.y = 0f;
