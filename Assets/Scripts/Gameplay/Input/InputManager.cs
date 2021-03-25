@@ -45,5 +45,15 @@ namespace Assets.Scripts.Gameplay.Input
         {
             return gameplayControls.Gameplay.Jump.triggered;
         }
+
+        public bool RightHandFired()
+        {
+            return gameplayControls.Gameplay.RightHandFire.triggered;
+        }
+
+        public bool Reloaded()
+        {
+            return gameplayControls.Gameplay.Reload.triggered;
+        }
     }
 }

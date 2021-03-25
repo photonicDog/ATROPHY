@@ -52,11 +52,11 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Reload"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""d1d6d6d8-1002-4cb7-9f93-2b3c8eaeb399"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold(duration=3)""
+                    ""interactions"": ""Hold(duration=1.5)""
                 },
                 {
                     ""name"": ""Jump"",
