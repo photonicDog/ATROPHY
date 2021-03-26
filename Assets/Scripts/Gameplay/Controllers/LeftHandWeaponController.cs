@@ -41,7 +41,7 @@ namespace Assets.Scripts.Gameplay.Controllers
                 Reload();
             }
 
-            Debug.Log(Ammo.Count);
+            //Debug.Log(Ammo.Count);
         }
 
         void Fire(IBullet bullet)
