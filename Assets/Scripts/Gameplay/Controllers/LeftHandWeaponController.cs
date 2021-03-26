@@ -6,11 +6,10 @@ using UnityEngine;
 
 namespace Assets.Scripts.Gameplay.Controllers
 {
-    public class WeaponController : MonoBehaviour
+    public class LeftHandWeaponController : MonoBehaviour
     {
         public List<IBullet> Ammo;
         public int maxAmmo = 6;
-        public bool rightHand;
         public Transform cameraTransform;
         public ParticleSystem muzzleFlash;
         public GameObject bulletHole;
@@ -30,16 +29,13 @@ namespace Assets.Scripts.Gameplay.Controllers
         // Update is called once per frame
         void Update()
         {
-            if (rightHand)
+            if (Ammo.Count > 0 && inputManager.LeftHandFired())
             {
-                if (inputManager.RightHandFired() && Ammo.Count > 0)
-                {
-                    var currentBullet = Ammo[0];
-                    Ammo.RemoveAt(0);
-                    Fire(currentBullet);
-                }
+                var currentBullet = Ammo[0];
+                Ammo.RemoveAt(0);
+                Fire(currentBullet);
             }
-
+        
             if (inputManager.Reloaded())
             {
                 Reload();

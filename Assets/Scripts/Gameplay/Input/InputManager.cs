@@ -46,6 +46,11 @@ namespace Assets.Scripts.Gameplay.Input
             return gameplayControls.Gameplay.Jump.triggered;
         }
 
+        public bool LeftHandFired()
+        {
+            return gameplayControls.Gameplay.LeftHandFire.triggered;
+        }
+
         public bool RightHandFired()
         {
             return gameplayControls.Gameplay.RightHandFire.triggered;
