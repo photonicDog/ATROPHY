@@ -20,6 +20,7 @@ namespace Assets.Scripts.Gameplay.Controllers
             {
                 Destroy(gameObject);
             }
+            //Debug.Log($"{gameObject.name}: {hitpoints}");
         }
     }
 }

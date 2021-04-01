@@ -34,7 +34,7 @@ namespace Assets.Scripts.Gameplay.Controllers
         {
             float x = virtualCamera.GetInputAxisProvider().GetAxisValue(0);
             float y = virtualCamera.GetInputAxisProvider().GetAxisValue(1);
-            Debug.Log($"{x},{y}");
+            //Debug.Log($"{x},{y}");
 
             _currentX = Mathf.Clamp(_currentX + y * Speed, PitchMin, PitchMax);
             _currentY += x * Speed;
@@ -47,7 +47,7 @@ namespace Assets.Scripts.Gameplay.Controllers
             Vector3 freeLook = r * dir;
             Vector3 pos = transform.position + freeLook;
             lookAt.position = pos;
-            Debug.Log(pos);
+            //Debug.Log(pos);
 
             Debug.DrawLine(lookAt.position, transform.position, Color.green);
         }

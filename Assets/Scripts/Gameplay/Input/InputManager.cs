@@ -60,5 +60,10 @@ namespace Assets.Scripts.Gameplay.Input
         {
             return gameplayControls.Gameplay.Reload.triggered;
         }
+
+        public bool Dodged()
+        {
+            return gameplayControls.Gameplay.Dodge.triggered;
+        }
     }
 }
