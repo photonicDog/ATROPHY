@@ -6,7 +6,7 @@ Created using Unity 2020.3.1f1
 Controls:
 * WASD: Move
 * Space: Jump
-* LShift: Spring
+* LShift: Dodge
 * M1: Fire left gun
 * M2: Fire right gun
 * Scroll: Spin chamber
