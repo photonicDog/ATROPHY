@@ -154,8 +154,58 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
-  playerJumpGravity: -9.8
-  playerJumpHeight: 2
+  playerJumpGravity: -9
+  playerJumpHeight: 1.5
+  dodgeSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 8
+      inSlope: -1.0545536
+      outSlope: -1.0545536
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.5689637
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -16.089024
+      outSlope: -16.089024
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.024203837
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dodgeDuration: 1
+  postDodgeSlow:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: 0.059001148
+      outSlope: 0.059001148
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.29583332
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.9781847
+      outSlope: 1.9781847
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.037500024
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  postDodgeSlowDuration: 1
 --- !u!4 &70703356
 Transform:
   m_ObjectHideFlags: 0
@@ -357,7 +407,6 @@ GameObject:
   - component: {fileID: 370304716}
   - component: {fileID: 370304715}
   - component: {fileID: 370304714}
-  - component: {fileID: 370304713}
   m_Layer: 0
   m_Name: Hole
   m_TagString: Untagged
@@ -365,20 +414,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &370304713
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370304712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &370304714
 MeshRenderer:
   m_ObjectHideFlags: 0
