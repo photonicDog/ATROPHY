@@ -73,6 +73,14 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf1939a4-651f-4a49-a117-7d40021d6f86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -196,6 +204,17 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                     ""action"": ""CameraControl"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a89eae9a-7c13-4fe2-9046-b3fbc7c95094"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -211,6 +230,7 @@ public class @GameplayControls : IInputActionCollection, IDisposable
         m_Gameplay_Reload = m_Gameplay.FindAction("Reload", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_CameraControl = m_Gameplay.FindAction("CameraControl", throwIfNotFound: true);
+        m_Gameplay_Dodge = m_Gameplay.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -267,6 +287,7 @@ public class @GameplayControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Reload;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_CameraControl;
+    private readonly InputAction m_Gameplay_Dodge;
     public struct GameplayActions
     {
         private @GameplayControls m_Wrapper;
@@ -278,6 +299,7 @@ public class @GameplayControls : IInputActionCollection, IDisposable
         public InputAction @Reload => m_Wrapper.m_Gameplay_Reload;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @CameraControl => m_Wrapper.m_Gameplay_CameraControl;
+        public InputAction @Dodge => m_Wrapper.m_Gameplay_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -308,6 +330,9 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                 @CameraControl.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
                 @CameraControl.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
                 @CameraControl.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraControl;
+                @Dodge.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodge;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -333,6 +358,9 @@ public class @GameplayControls : IInputActionCollection, IDisposable
                 @CameraControl.started += instance.OnCameraControl;
                 @CameraControl.performed += instance.OnCameraControl;
                 @CameraControl.canceled += instance.OnCameraControl;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
             }
         }
     }
@@ -346,5 +374,6 @@ public class @GameplayControls : IInputActionCollection, IDisposable
         void OnReload(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnCameraControl(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }
