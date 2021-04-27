@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Gameplay.Input;
+using Assets.Scripts.Gameplay.Interfaces;
 using Assets.Scripts.Gameplay.Types.Implementations;
 using Assets.Scripts.Gameplay.Types.Interfaces;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Gameplay.Controllers
 {
-    public class RightHandWeaponController : MonoBehaviour
+    public class RightHandWeaponController : MonoBehaviour, IWeaponAccess
     {
         public List<IBullet> Ammo;
         public int maxAmmo = 6;
@@ -55,7 +56,7 @@ namespace Assets.Scripts.Gameplay.Controllers
             }
         }
 
-        void CollectBullet(IBullet bullet)
+        public void CollectBullet(IBullet bullet)
         {
             if(Ammo.Count < maxAmmo)
             {

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Gameplay.Input;
+using Assets.Scripts.Gameplay.Interfaces;
 using Assets.Scripts.Gameplay.Types.Implementations;
 using Assets.Scripts.Gameplay.Types.Interfaces;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Gameplay.Controllers
 {
-    public class LeftHandWeaponController : MonoBehaviour
+    public class LeftHandWeaponController : MonoBehaviour, IWeaponAccess
     {
         public List<IBullet> Ammo;
         public int maxAmmo = 6;
@@ -44,6 +45,14 @@ namespace Assets.Scripts.Gameplay.Controllers
             //Debug.Log(Ammo.Count);
         }
 
+        public void CollectBullet(IBullet bullet)
+        {
+            if (Ammo.Count < maxAmmo)
+            {
+                Ammo.Add(bullet);
+            }
+        }
+
         void Fire(IBullet bullet)
         {
             RaycastHit target;
@@ -52,14 +61,6 @@ namespace Assets.Scripts.Gameplay.Controllers
                 bullet.OnImpact(target);
                 muzzleFlash.Play();
                 Instantiate(bulletHole, target.point + 0.1f*(target.normal), Quaternion.LookRotation(-target.normal));
-            }
-        }
-
-        void CollectBullet(IBullet bullet)
-        {
-            if(Ammo.Count < maxAmmo)
-            {
-                Ammo.Add(bullet);
             }
         }
 

@@ -11,10 +11,20 @@ namespace Assets.Scripts.Gameplay.Types.Implementations
 
         public void OnImpact(RaycastHit target)
         {
-            var enemy = target.transform.GetComponent<EnemyController>();
-            if (enemy != null)
+            if (target.transform.CompareTag("Enemy"))
             {
-                enemy.hitpoints -= 1;
+                var enemy = target.transform.GetComponent<EnemyController>();
+                enemy.hitBy.Add(this);
+
+                if (enemy != null)
+                {
+                    enemy.hitpoints -= 1;
+
+                    if (enemy.hitpoints == 0)
+                    {
+                        enemy.OnDeath();
+                    }
+                }
             }
         }
     }

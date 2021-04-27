@@ -1,4 +1,7 @@
+using Assets.Scripts.Gameplay.Controllers;
 using Assets.Scripts.Gameplay.Input;
+using Assets.Scripts.Gameplay.Interfaces;
+using Assets.Scripts.Gameplay.Types.Interfaces;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
@@ -20,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public AnimationCurve postDodgeSlow;
     [SerializeField]
     public float postDodgeSlowDuration = 2;
+    [SerializeField]
+    private LeftHandWeaponController leftHandController;
+    [SerializeField]
+    private RightHandWeaponController rightHandController;
 
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -29,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private bool isDodge = false;
     private Vector3 dodgeDirection;
     private float speedMod = 1;
+    private bool fullyLoaded = true;
 
     void Start()
     {
@@ -45,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        fullyLoaded = leftHandController.Ammo.Count == 6 && rightHandController.Ammo.Count == 6;
+
         isGrounded = Physics.Raycast(controller.bounds.center, Vector3.down, controller.bounds.extents.y + 0.3f);
         if (isGrounded && playerVelocity.y < 0f)
         {
@@ -77,18 +87,14 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Dodge()
     {
+        speedMod = 0.5f;
         var startDodgeTime = Time.time;
         var currentDodgeDuration = startDodgeTime + dodgeDuration;
-        while (Time.time < currentDodgeDuration)
+        while (Time.time < currentDodgeDuration || !isGrounded)
         {
             var time = dodgeSpeed.length * ((Time.time - startDodgeTime) / currentDodgeDuration);
             Debug.Log(dodgeSpeed.Evaluate(time));
             controller.Move(dodgeDirection * Time.deltaTime * dodgeSpeed.Evaluate(time));
-            yield return new WaitForEndOfFrame();
-        }
-
-        while(!isGrounded)
-        {
             yield return new WaitForEndOfFrame();
         }
 
@@ -104,5 +110,28 @@ public class PlayerController : MonoBehaviour
 
         speedMod = 1;
         isDodge = false;
+    }
+
+    public bool AddBullet(IBullet bullet)
+    {
+        if (!fullyLoaded)
+        {
+            IWeaponAccess reloadedGun;
+            if (leftHandController.Ammo.Count < rightHandController.Ammo.Count)
+            {
+                reloadedGun = leftHandController;
+            }
+            else
+            {
+                reloadedGun = rightHandController;
+            }
+
+            reloadedGun.CollectBullet(bullet);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
