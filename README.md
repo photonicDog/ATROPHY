@@ -1,7 +1,7 @@
 # ATROPHY
 Repo for fast-paced endless coliseum shooter ATROPHY
 
-The world is dying. On it's knell, the egg at the heart of the world will hatch and rebirth the planet from its ashes. You will kill it in its infancy.
+Indefinitely on-hold. None of this code is good but steal it if you want idc. I might come back to this someday
 
 Created using Unity 2020.3.1f1
 
